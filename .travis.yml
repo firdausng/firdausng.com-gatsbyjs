@@ -5,7 +5,7 @@ node_js:
 install:
 - pip install --user awscli
 before_script:
-  - npm install -g gulp-cli
+  - npm install --global gatsby-cli
 script:
 - make deploy
 branches:
