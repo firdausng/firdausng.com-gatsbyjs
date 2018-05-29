@@ -5,6 +5,7 @@ install:
 - pip install --user awscli
 before_script:
 - npm install --global gatsby-cli
+- npm install
 script:
 - make deploy
 branches:
