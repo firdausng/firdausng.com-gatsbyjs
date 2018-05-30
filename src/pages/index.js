@@ -8,7 +8,7 @@ export default ({ data }) => {
   return (
     <div>
       <g.H1 display={"inline-block"} borderBottom={"1px solid"}>
-        Amazing Pandas Eating Things
+        {data.site.siteMetadata.title} is writing...
       </g.H1>
       <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
       {data.allMarkdownRemark.edges.map(({ node }) => (
@@ -45,6 +45,11 @@ export const query = graphql`
           }
           excerpt
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }
