@@ -4,13 +4,14 @@ import { css } from "glamor";
 import Link from "gatsby-link";
 
 import { rhythm } from "../utils/typography";
+require("prismjs/themes/prism-twilight.css");
 
 const linkStyle = css({ float: `right` });
 
 export default ({ children, data }) => (
   <g.Div
     margin={`0 auto`}
-    maxWidth={700}
+    maxWidth={800}
     padding={rhythm(2)}
     paddingTop={rhythm(1.5)}
   >
