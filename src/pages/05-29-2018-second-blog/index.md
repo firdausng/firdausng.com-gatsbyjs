@@ -1,6 +1,6 @@
 ---
-path: '/second-post'
 title: 'Dillinger'
+date: "2017-08-21"
 ---
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
