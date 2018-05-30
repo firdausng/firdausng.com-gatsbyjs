@@ -1,20 +1,20 @@
-const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
+const path = require(`path`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators;
+  const { createNodeField } = boundActionCreators
   if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode, basePath: `pages` });
+    const slug = createFilePath({ node, getNode, basePath: `pages` })
     createNodeField({
       node,
       name: `slug`,
-      value: slug
-    });
+      value: slug,
+    })
   }
-};
+}
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+  const { createPage } = boundActionCreators
   return new Promise((resolve, reject) => {
     graphql(`
       {
@@ -23,6 +23,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             node {
               fields {
                 slug
+              }
+              frontmatter {
+                tags
               }
             }
           }
@@ -35,11 +38,33 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           component: path.resolve(`./src/templates/blog-post.js`),
           context: {
             // Data passed to context is available in page queries as GraphQL variables.
-            slug: node.fields.slug
-          }
+            slug: node.fields.slug,
+          },
+        })
+      })
+
+      let tags = []
+      result.data.allMarkdownRemark.edges.forEach(edge => {
+        tags = [...tags, ...edge.node.frontmatter.tags]
+      })
+
+      uniqueTags = tags.filter(function(item, pos) {
+        return tags.indexOf(item) == pos
+      })
+
+      
+
+      uniqueTags.forEach(tag => {
+        createPage({
+          path: `/tags/${tag}/`,
+          component: path.resolve(`./src/templates/tags.js`),
+          context: {
+            tag,
+          },
         });
       });
-      resolve();
-    });
-  });
-};
+
+      resolve()
+    })
+  })
+}
