@@ -1,8 +1,8 @@
 ---
 title: 'Simple Cucumber-JVM test with TestNG and Selenium'
 date: "2018-05-30"
-tags: ['Selenium', 'Cucumber-JVM', 'TestNg', 'Java']
-categories: ['Automation Test', 'Cucumber']
+tags: ['selenium', 'cucumber-jvm', 'testng', 'java']
+categories: ['Automation Test', 'Tutorial']
 ---
 
 Hi! This is example of using **TestNG** as test runner to run **Cucumber-JVM** and **Selenium**  
