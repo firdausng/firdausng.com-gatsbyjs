@@ -2,18 +2,26 @@
 title: 'Simple Cucumber-JVM test with TestNG and Selenium'
 date: "2018-05-30"
 tags: ['Selenium', 'Cucumber-JVM', 'TestNg', 'Java']
+categories: ['Automation Test', 'Cucumber']
 ---
 
 Hi! This is example of using **TestNG** as test runner to run **Cucumber-JVM** and **Selenium**  
 In this article, I am going to assume that you already have experience with **Java IDE** as well as **Maven**
 
+<br>
+<br>
+
 # Setting Up Development Environment
+
+<br>
 
 ## Required Tools
 
 1.  Maven
 2.  Integrated Development Environment (IDE) - i will be using [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download) in this article.
 3.  Java JDK (7+)
+
+<br>
 
 ## Setup Basic Maven + Cucumber-JVM Project
 
@@ -24,6 +32,8 @@ In this article, I am going to assume that you already have experience with **Ja
     > enable ‘Import Maven projects automatically
 3.  In your **pom.xml**, copy and paste below example pom.xml.  
     make sure you do not change your existing **groupId** and **artifactId**
+
+<br>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
@@ -96,11 +106,15 @@ In this article, I am going to assume that you already have experience with **Ja
  </dependencies>  
 </project>
 ```
-
+<br>
 4.  (Optional) If you have not download **Cucumber for Java** plugin, please do so.  
-    This plugin is used to provide snippet and test runner for Cucumber-JVM  
-    > _File > Settings > Plugins_ _> search ‘Cucumber for Java’ > Install_
-    > restart your IDE
+    This plugin is used to provide snippet and test runner for Cucumber-JVM 
+
+> File > Settings > Plugins > search Cucumber for Java > Install  
+> restart your IDE
+
+<br>
+<br>
 
 ## Add Basic Tests
 
@@ -130,6 +144,9 @@ Feature: Google Test
     When I query for "cucumber spring selenium"  
     Then i should see "spring cucumber selenium" as 1 of the suggested search
 ```
+
+<br>
+<br>
 
 ## Add Step Definition
 
@@ -178,8 +195,12 @@ public class GoogleStepDef {
     }  
 }
 ```
+<br>
 
 Do not worry about the **PendingException** since we going to change it later once we have created **Page Object Model**.  
+
+<br>
+
 
 ## Add Page Object
 
@@ -217,6 +238,7 @@ public abstract class BasePage {
   public abstract boolean isAt();  
 }
 ```
+<br>
 
 Create another class under this package and named it as **GooglePage** and extends the **BasePage**
 
@@ -315,6 +337,9 @@ if (suggestCount > 0) {
 }
 ```
 
+<br>
+<br>
+
 ## Wire Page Object to The Step Definition
 
 Open back **GoogleStepDef** class and copy paste below code
@@ -363,10 +388,11 @@ private GooglePage google;
   }  
 }
 ```
+<br><br>
 
 ## Support Class to Run Selenium
 
-Cucumber-JVM has a built-in support for dependency injection library such as _picocontainer, guice and spring.  
+Cucumber-JVM has a built-in support for dependency injection library such as *picocontainer, guice and spring*.  
 We going to utilize dependency injection to inject **Page Object Class** and **Webdriver**.  
 We going to use [picocontainer](https://github.com/cucumber/cucumber-jvm/tree/master/picocontainer) as our dependency injection library because it is the easiest to used.  
 Create a package name **util** and create a class named **SharedDriver.java**. Copy paste code below to the class  
@@ -472,6 +498,7 @@ public SharedDriver() {
   }  
 }
 ```
+<br>
 
 create another class named **PicoDependencyInjector** and paste the code below
 
@@ -487,6 +514,7 @@ public class PicoDependencyInjector extends PicoFactory {
   }  
 }
 ```
+<br><br>
 
 ## TestNG Test Runner
 
@@ -534,8 +562,10 @@ public class UITest {
   }  
 }
 ```
+<br>
+in the root folder, create a file named <b>testng.xml</b> where we going to put testng configuration to this file
 
-in the root folder, create a file named **testng.xml** where we going to put testng configuration to this file
+<br>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
@@ -552,7 +582,7 @@ in the root folder, create a file named **testng.xml** where we going to put tes
 	</test>
 </suite>
 ```
-
+<br><br>
 ## Run Test
 
 There are few ways to run the test.  
@@ -560,6 +590,7 @@ We going to run the test using **terminal** and **Maven**
 
 1.  go to the root folder of the project
 2.  run this command `mvn clean test`
+<br><br>
 
 ## Conclusion
 
