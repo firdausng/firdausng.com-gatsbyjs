@@ -5,6 +5,8 @@ tags: ['jmeter']
 categories: ['Perfomance Test', 'article']
 ---
 
+![](graph.jpg)
+
 It is always tricky whenever i need to perform load testing a [single page application site (SPA)](https://en.wikipedia.org/wiki/Single-page_application) using jmeter. SPA is built using JavaScript to render the html page and used **XMLHttpRequest** object to send request to server. XMLHttpRequest is executed by javascript and can be sent as **asynchronous** request which mean that multiple XMLHttpRequest objects can be executed at the same time.
 
 This presented a technical challenge for jmeter because jmeter is sending http request sequentially which make the response time for a single transition controller that contains multiple XMLHttpRequest request is much higher that it actually is. 
